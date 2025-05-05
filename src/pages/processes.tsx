@@ -52,6 +52,13 @@ export default function ProcessesPage() {
     setEditingProcess(null);
   };
 
+  const handleDeleteProcess = async (id: string) => {
+    await fetch(`/api/processes?id=${id}`, {
+      method: 'DELETE',
+    });
+    fetchProcesses();
+  };
+
   return (
     <Box sx={{ padding: '2rem' }}>
       <Typography variant="h4" gutterBottom>
@@ -92,6 +99,7 @@ export default function ProcessesPage() {
           open={Boolean(editingProcess)}
           onClose={() => setEditingProcess(null)}
           onSave={handleUpdateProcess}
+          onDelete={handleDeleteProcess}
         />
       )}
     </Box>
